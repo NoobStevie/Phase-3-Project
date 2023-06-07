@@ -1,0 +1,77 @@
+import React, { useState } from 'react';
+
+function SongSearchPage (){
+  const [lyrics, setLyrics] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleLyricsChange = (e) => {
+    setLyrics(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // We will perform our search logic here. In this section, our react app seeks to connect with our Ruby backend
+    //we use the fetch function to make a GET request to the /search_song_by_lyrics API endpoint on the same server where the React app is hosted
+  
+    try {
+      const response = await fetch(`/search_song_by_lyrics?lyrics=${encodeURIComponent(lyrics)}`);
+      const data = await response.json();
+  
+      if (response.ok) {
+        setSearchResults(data.results);
+      } else {
+        // Handle error response
+        console.error(data.error);
+      }
+    } catch (error) {
+      // Handle network or other errors
+      console.error(error);
+    }
+  };
+
+  const searchSongs = (lyrics) => {
+    // Simulating API call to search for songs with matching lyrics
+    
+    const songs = [
+      { id: 1, title: 'Song 1', artist: 'Artist 1', lyrics: 'Lyrics of Song 1' },
+      { id: 2, title: 'Song 2', artist: 'Artist 2', lyrics: 'Lyrics of Song 2' },
+      { id: 3, title: 'Song 3', artist: 'Artist 3', lyrics: 'Lyrics of Song 3' },
+    ];
+
+    return songs.filter((song) => song.lyrics.includes(lyrics));
+  };
+
+  return (
+    <div>
+      <h1>Song Search</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="lyrics">Lyrics:</label>
+          <input
+            type="text"
+            id="lyrics"
+            value={lyrics}
+            onChange={handleLyricsChange}
+            required
+          />
+        </div>
+        <button type="submit">Search</button>
+      </form>
+
+      <h2>Search Results</h2>
+      {searchResults.length > 0 ? (
+        <ul>
+          {searchResults.map((song) => (
+            <li key={song.id}>
+              <strong>{song.title}</strong> by {song.artist}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No songs found with matching lyrics.</p>
+      )}
+    </div>
+  );
+};
+
+export default SongSearchPage;
