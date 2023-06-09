@@ -6,10 +6,10 @@ For this project, we utilized a movie API that would allow a user to create an a
 
 ## Authors:
 
-[Noah Mwangi](https://github.com/Mwangi-Noah)
-[Stephanie Wanja](https://github.com/WanjaNjunge)
-[Nicholas Musau](https://github.com/0maddox)
-[Steve Kariuki](https://github.com/NoobStevie)
+1. [Noah Mwangi](https://github.com/Mwangi-Noah)
+2. [Stephanie Wanja](https://github.com/WanjaNjunge)
+3. [Nicholas Musau](https://github.com/0maddox)
+4. [Steve Kariuki](https://github.com/NoobStevie)
 
 ## Description:
 
